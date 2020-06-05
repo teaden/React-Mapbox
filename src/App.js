@@ -10,6 +10,8 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 class App extends React.Component {
 
   componentDidMount() {
+
+    // Creates new map instance
     const map = new mapboxgl.Map({
       container: this.mapWrapper,
       style: 'mapbox://styles/mapbox/streets-v10',
@@ -17,17 +19,20 @@ class App extends React.Component {
       zoom: 12
     });
 
+    // Creates new directions control instance
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
       profile: 'mapbox/driving',
     });
 
+    // Integrates directions control with map
     map.addControl(directions, 'top-left');
   }
 
   render() {
     return (
+      // Populates map by referencing map's container property
       <div ref={el => (this.mapWrapper = el)} className="mapWrapper" />
     );
   }
